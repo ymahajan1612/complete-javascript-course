@@ -72,7 +72,6 @@ const currencies = new Map([
 ]);
 
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
-
 /////////////////////////////////////////////////
 
 // let arr = ['a', 'b', 'c', 'd', 'e'];
@@ -123,16 +122,18 @@ const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 // });
 
 ////////////////////////////////// Bankist project
-const displayMovements = function (movements) {
+const displayMovements = function (movements, sort = false) {
   containerMovements.innerHTML = '';
 
-  movements.forEach(function (mov, i) {
+  const movs = sort ? movements.slice().sort((a, b) => a - b) : movements;
+
+  movs.forEach(function (mov, i) {
     const type = mov > 0 ? 'deposit' : 'withdrawal';
     const html = `
-  <div class="movements__row">
+    <div class="movements__row">
     <div class="movements__type movements__type--${type}">${i + 1} ${type}</div>
     <div class="movements__value">${mov}</div>
-  </div>
+    </div>
     `;
     containerMovements.insertAdjacentHTML('afterbegin', html);
   });
@@ -248,6 +249,14 @@ btnLoan.addEventListener('click', function (e) {
   }
   inputLoanAmount.value = '';
 });
+
+let sorted = false;
+btnSort.addEventListener('click', function (e) {
+  e.preventDefault();
+  displayMovements(currentAccount.movements, !sorted);
+  sorted = !sorted;
+});
+
 ///////////////////////////////// challenge #1
 // const checkDogs = function (dogsJulia, dogsKate) {
 //   const dogsJuliaCorrect = dogsJulia.slice(1, -2);
@@ -335,14 +344,40 @@ btnLoan.addEventListener('click', function (e) {
 // console.log(movements.every(deposit));
 // console.log(movements.filter(deposit));
 
-const arr = [[1, 2, 3], [4, 5, 6], 7, 8];
-console.log(arr.flat());
+// const arr = [[1, 2, 3], [4, 5, 6], 7, 8];
+// console.log(arr.flat());
 
-const arrDeep = [[1, [2, 3]], [4, [5, 6]], 7, 8];
-console.log(arrDeep.flat(1)); // default
-console.log(arrDeep.flat(2));
+// const arrDeep = [[1, [2, 3]], [4, [5, 6]], 7, 8];
+// console.log(arrDeep.flat(1)); // default
+// console.log(arrDeep.flat(2));
 
-const accountMovements = accounts.map(acc => acc.movements);
-const allMovements = accountMovements.flat();
-const overallBalance = allMovements.reduce((acc, mov) => acc + mov, 0);
-console.log(overallBalance);
+// // flat
+// const accountMovements = accounts.map(acc => acc.movements);
+// const allMovements = accountMovements.flat();
+// const overallBalance = allMovements.reduce((acc, mov) => acc + mov, 0);
+// console.log(overallBalance);
+
+// const overallBalance2 = accounts
+//   .flatMap(acc => acc.movements)
+//   .reduce((acc, mov) => acc + mov, 0);
+
+// const owners = ['Jonas', 'Zack', 'Adam', 'Martha'];
+// owners.sort();
+// console.log(owners);
+
+// console.log(movements);
+
+// // a and b represent consecutive numbers
+// //return  < 0 a, b (keep order)
+// // return > 0 b, a (switch order)
+// movements.sort((a, b) => a - b);
+
+// console.log(movements);
+//////////////////////////////// More ways of creating and filling arrays
+const x = new Array(7); // creates array with 7 empty elements
+x.fill(1); // fills the empty array with 1s
+const y = new Array(5);
+y.fill(1, 2, 4); // fills the empty array with 1s starting from 2nd to 4th index
+
+// Array.from
+const z = Array.from({ length: 7 }, () => 1);
