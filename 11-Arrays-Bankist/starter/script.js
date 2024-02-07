@@ -374,10 +374,85 @@ btnSort.addEventListener('click', function (e) {
 
 // console.log(movements);
 //////////////////////////////// More ways of creating and filling arrays
-const x = new Array(7); // creates array with 7 empty elements
-x.fill(1); // fills the empty array with 1s
-const y = new Array(5);
-y.fill(1, 2, 4); // fills the empty array with 1s starting from 2nd to 4th index
+// const x = new Array(7); // creates array with 7 empty elements
+// x.fill(1); // fills the empty array with 1s
+// const y = new Array(5);
+// y.fill(1, 2, 4); // fills the empty array with 1s starting from 2nd to 4th index
 
-// Array.from
-const z = Array.from({ length: 7 }, () => 1);
+// // Array.from
+// const z = Array.from({ length: 7 }, () => 1);
+
+// labelBalance.addEventListener('click', function () {
+//   const movementsUI = Array.from(
+//     document.querySelectorAll('.movements__value'),
+//     el => Number(el.textContent)
+//   );
+
+//   console.log(movementsUI);
+// });
+
+////////////////////// Array Methods practice
+
+// // #1
+// const bankDepositSum = accounts
+//   .flatMap(acc => acc.movements)
+//   .filter(mov => mov > 0)
+//   .reduce((acc, curr) => acc + curr, 0);
+
+// console.log(bankDepositSum);
+
+// // #2
+// const numDeposits1000 = accounts
+//   .flatMap(acc => acc.movements)
+//   .reduce((acc, curr) => (curr >= 1000 ? acc + 1 : acc), 0);
+// console.log(numDeposits1000);
+
+// // let a = 10;
+// // console.log(a++); // ++ returns the old value (10)
+// // let b = 10;
+// // console.log(++b); // prefix ++ returns new value (11)
+
+// // #3
+// const sums = accounts
+//   .flatMap(acc => acc.movements)
+//   .reduce(
+//     (sums, cur) => {
+//       // cur > 0 ? (sums.deposits += cur) : (sums.withdrawals += cur);
+//       sums[cur > 0 ? 'deposits' : 'withdrawals'] += cur;
+//       return sums;
+//     },
+//     { deposits: 0, withdrawals: 0 }
+//   );
+
+// // #4 Convert title case
+
+// const convertTitleCase = function (title) {
+//   const exceptions = ['a', 'an', 'the', 'but', 'or', 'on', 'in', 'with'];
+//   const titleLower = title.toLowerCase();
+//   return titleLower
+//     .split(' ')
+//     .map(word =>
+//       exceptions.includes(word) ? word : word[0].toUpperCase() + word.slice(1)
+//     )
+//     .join(' ');
+// };
+
+// console.log(convertTitleCase('this is a NICE title'));
+
+////// CODING CHALLENGE 4
+const dogs = [
+  { weight: 22, curFood: 250, owners: ['Alice', 'Bob'] },
+  { weight: 8, curFood: 200, owners: ['Matilda'] },
+  { weight: 13, curFood: 275, owners: ['Sarah', 'John'] },
+  { weight: 32, curFood: 340, owners: ['Michael'] },
+];
+
+// 1
+dogs.forEach(dog => (dog.recommendedFood = (dog.weight ** 0.75 * 28) / 1000));
+
+// 2
+dogs.forEach(dog => {
+  if (dog.owners.includes('Sarah')) {
+    return;
+  }
+});
